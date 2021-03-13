@@ -4,12 +4,16 @@
 import socket
 print('Server starting...')
 sock = socket.socket()
-sock.bind(('', 9091))
+port=input("Type in the port: ")
+if not ((0<=port<65536) and isinstance(port, int)):
+	print('Wrong port id, the default one will be used (9080)')
+	port=9080
+sock.bind(('', int(port)))
 while True:
 	print('Listening to the port...')
 	sock.listen(1)
 	conn, addr = sock.accept()
-	print('Connceted to ', addr)
+	print('Connected to ', addr)
 
 	while True:
 		msg = ''
