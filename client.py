@@ -10,11 +10,15 @@ if not ((0<=port<65536) and isinstance(port, int)):
         print('Wrong port id, the default one will be used (9080)')
         port=9080
 try:
-	print("Connecting to server..")
-	sock.connect((host, int(port)))
-except (TypeError, socket.gaierror):
-	print("Wrong host! You'll be connected to localhost")
-	sock.connect(('localhost', int(port)))
+	try:
+		print("Connecting to server..")
+		sock.connect((host, int(port)))
+	except (TypeError, socket.gaierror):
+		print("Wrong host! You'll be connected to localhost")
+		sock.connect(('localhost', int(port)))
+except socket.error:
+	print('Connection to this port refused, redirecting to deafult port (9080)')
+	sock.connect(('localhost', 9080))
 msg = input("Type in the data: ")
 while msg != "exit":
 	print("Sending data...")
