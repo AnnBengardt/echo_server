@@ -13,18 +13,17 @@ try:
 	print("Connecting to server..")
 	sock.connect((host, int(port)))
 except (TypeError, socket.gaierror):
-	print("Wrong host!")
-	raise KeyboardInterrupt
-else:
-	msg = input("Type in the data: ")
-	while msg != "exit":
-		print("Sending data...")
-		sock.send(msg.encode())
-		print("Accepting data...")
-		data = sock.recv(1024)
-		print(data.decode())
-		msg = input()
+	print("Wrong host! You'll be connected to localhost")
+	sock.connect(('localhost', int(port)))
+msg = input("Type in the data: ")
+while msg != "exit":
+	print("Sending data...")
+	sock.send(msg.encode())
+	print("Accepting data...")
+	data = sock.recv(1024)
+	print(data.decode())
+	msg = input()
 
-	print("Closing connection..")
-	sock.close()
+print("Closing connection..")
+sock.close()
 
