@@ -6,7 +6,7 @@ from time import sleep
 sock = socket.socket()
 sock.setblocking(1)
 print("Connecting to server..")
-sock.connect(('localhost', 9090))
+sock.connect(('localhost', 9091))
 
 
 msg = input("Type in the data: ")
